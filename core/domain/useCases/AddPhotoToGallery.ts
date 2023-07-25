@@ -1,23 +1,24 @@
 import { GalleryState } from "../../GalleryStore";
 import { Photo } from "../entities/Photo";
-import { Dependencies } from "../../types/Dependencies";
 import { SetState } from "../../types/SetState";
+import { PhotosRepository } from "../gateways/photosRepository";
+
+const savePhotoInRepository = async (
+  photosRepo: PhotosRepository,
+  photo: Photo
+) => await photosRepo.save(photo);
+
+const updateStateWithPhoto = (set: SetState<GalleryState>, photo: Photo) =>
+  set((state) => ({
+    photos: [...state.photos, photo],
+  }));
 
 export const addPhotoToGallery =
-  (deps: Dependencies) =>
+  (photosRepo: PhotosRepository) =>
   (set: SetState<GalleryState>) =>
   async (photo: Photo) => {
-    try {
-      await deps.photosRepository.save(photo);
-
-      set((state) => ({
-        photos: [...state.photos, photo],
-      }));
-
-      return Promise.resolve();
-    } catch (error) {
-      return Promise.reject(error);
-    }
+    await savePhotoInRepository(photosRepo, photo);
+    updateStateWithPhoto(set, photo);
   };
 
 /**
