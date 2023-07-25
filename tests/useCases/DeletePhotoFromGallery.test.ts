@@ -37,11 +37,18 @@ describe("DeletePhotoFromGallery UseCase", () => {
   test("Should return Gallery without photo2 elements", async () => {
     await testGalleryStore.getState().deletePhotoFromGallery(photo2);
 
+    // In store
     let gallery = testGalleryStore.getState().photos;
 
     expect(gallery.length).toBe(1);
-
     expect(gallery).toContainEqual(photo1);
     expect(gallery).not.toContainEqual(photo2);
+
+    // In repository
+    let galleryFromRepository = inMemoryPhotosRepository.photos;
+
+    expect(galleryFromRepository.length).toBe(1);
+    expect(galleryFromRepository).toContainEqual(photo1);
+    expect(galleryFromRepository).not.toContainEqual(photo2);
   });
 });
