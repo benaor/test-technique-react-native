@@ -26,3 +26,6 @@ web-build/
 # Expo
 ios/
 android/
+
+# Tests
+coverage/
