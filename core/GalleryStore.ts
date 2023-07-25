@@ -3,16 +3,19 @@ import { addPhotoToGallery } from "./domain/useCases/AddPhotoToGallery";
 import { Dependencies } from "./types/Dependencies";
 import { Photo } from "./domain/entities/Photo";
 import { viewAllPhotoInGallery } from "./domain/useCases/ViewAllPhotoInGallery";
+import { deletePhotoFromGallery } from "./domain/useCases/DeletePhotoFromGallery";
 
 export interface GalleryState {
   photos: Array<Photo>;
-  addPhoto: (photo: Photo) => Promise<void>;
-  getAllPhotos: () => Promise<void>;
+  addPhotoToGallery: (photo: Photo) => Promise<void>;
+  viewAllPhotoInGallery: () => Promise<void>;
+  deletePhotoFromGallery: (photo: Photo) => Promise<void>;
 }
 
-export const createGalleryStore = (deps: Dependencies) =>
+export const createGalleryStore = ({ photosRepository }: Dependencies) =>
   create<GalleryState>((set) => ({
     photos: [],
-    addPhoto: addPhotoToGallery(deps.photosRepository)(set),
-    getAllPhotos: viewAllPhotoInGallery(deps.photosRepository)(set),
+    addPhotoToGallery: addPhotoToGallery(photosRepository)(set),
+    viewAllPhotoInGallery: viewAllPhotoInGallery(photosRepository)(set),
+    deletePhotoFromGallery: deletePhotoFromGallery(photosRepository)(set),
   }));

@@ -17,7 +17,7 @@ describe("ViewAllPhotosInGallery UseCase", () => {
   });
 
   test("Should return an empty gallery", async () => {
-    await testGalleryStore.getState().getAllPhotos();
+    await testGalleryStore.getState().viewAllPhotoInGallery();
 
     const gallery = testGalleryStore.getState().photos;
     expect(gallery.length).toBe(0);
@@ -28,15 +28,12 @@ describe("ViewAllPhotosInGallery UseCase", () => {
     const photo2 = new Photo("c", "d");
     inMemoryPhotosRepository.photos = [photo1, photo2];
 
-    await testGalleryStore.getState().getAllPhotos();
+    await testGalleryStore.getState().viewAllPhotoInGallery();
 
     const gallery = testGalleryStore.getState().photos;
     expect(gallery.length).toBe(2);
 
-    expect(gallery[0].getTitle()).toBe("a");
-    expect(gallery[0].getImageData()).toBe("b");
-
-    expect(gallery[1].getTitle()).toBe("c");
-    expect(gallery[1].getImageData()).toBe("d");
+    expect(gallery).toContainEqual(photo1);
+    expect(gallery).toContainEqual(photo2);
   });
 });

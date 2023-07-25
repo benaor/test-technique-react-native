@@ -26,20 +26,18 @@ describe("AddPhotoToGallery UseCase", () => {
 
   test("Gallery should have just one photo", async () => {
     const photo = new Photo("photoTitle", "photoData");
-    await testGalleryStore.getState().addPhoto(photo);
+    await testGalleryStore.getState().addPhotoToGallery(photo);
 
     // In store
     const gallery = testGalleryStore.getState().photos;
-    expect(gallery.length).toBe(1);
 
-    expect(gallery[0].getTitle()).toBe("photoTitle");
-    expect(gallery[0].getImageData()).toBe("photoData");
+    expect(gallery.length).toBe(1);
+    expect(gallery).toContainEqual(photo);
 
     // In repository
     const galleryFromRepository = await inMemoryPhotosRepository.getAllPhotos();
 
     expect(galleryFromRepository.length).toEqual(1);
-    expect(galleryFromRepository[0].getTitle()).toBe("photoTitle");
-    expect(galleryFromRepository[0].getImageData()).toBe("photoData");
+    expect(galleryFromRepository).toContainEqual(photo);
   });
 });

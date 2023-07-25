@@ -12,4 +12,9 @@ export class InMemoryPhotosRepository implements PhotosRepository {
   async getAllPhotos(): Promise<Photo[]> {
     return Promise.resolve(this.photos);
   }
+
+  async deletePhoto(photo: Photo): Promise<void> {
+    this.photos = this.photos.filter((p) => p !== photo);
+    Promise.resolve();
+  }
 }
