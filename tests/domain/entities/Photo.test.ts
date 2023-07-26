@@ -1,4 +1,4 @@
-import { Photo } from "../../core/domain/entities/Photo";
+import { Photo } from "../../../core/domain/entities/Photo";
 
 describe("Photo", () => {
   const title = "Title";

@@ -1,8 +1,8 @@
-import { createGalleryStore } from "../../core/GalleryStore";
-import { InMemoryPhotosRepository } from "../../core/adapters/InMemoryPhotosRepository";
-import { Photo } from "../../core/domain/entities/Photo";
-import { AppGalleryState } from "../../core/types/AppState";
-import { TestDependencies } from "../builder/TestsDependencies";
+import { createGalleryStore } from "../../../core/GalleryStore";
+import { InMemoryPhotosRepository } from "../../../core/adapters/InMemoryPhotosRepository";
+import { Photo } from "../../../core/domain/entities/Photo";
+import { AppGalleryState } from "../../../core/types/AppState";
+import { TestDependencies } from "../../builder/TestsDependencies";
 
 let testGalleryStore: AppGalleryState;
 let inMemoryPhotosRepository: InMemoryPhotosRepository;
