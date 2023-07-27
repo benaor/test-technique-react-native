@@ -41,7 +41,6 @@ describe("MmkvPhotosRepository", () => {
 
     await mmkvPhotosRepository.save(photo1);
     await mmkvPhotosRepository.save(photo2);
-
     await mmkvPhotosRepository.deletePhoto(photo2);
 
     const photos = await mmkvPhotosRepository.getAllPhotos();

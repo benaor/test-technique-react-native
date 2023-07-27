@@ -27,11 +27,7 @@ export class MmkvPhotosRepository implements PhotosRepository {
 
   async deletePhoto(photo: Photo): Promise<void> {
     const existingPhotos = await this.getAllPhotos();
-    const updatedPhotos = existingPhotos.filter(
-      (p) =>
-        p.getTitle() !== photo.getTitle() &&
-        p.getImageData() !== photo.getImageData()
-    );
+    const updatedPhotos = existingPhotos.filter((p) => p.id !== photo.id);
     this.storage.set(this.storageKey, JSON.stringify(updatedPhotos));
   }
 }

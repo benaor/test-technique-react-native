@@ -17,4 +17,9 @@ describe("Photo", () => {
   test("should return the correct imageData", () => {
     expect(photo.getImageData()).toBe(imageData);
   });
+
+  it("should use Date.now() to generate the id", () => {
+    const mockPhoto = new Photo("titre", "abcdefghijklmnopqrstuvwxyz123456789");
+    expect(mockPhoto.id).toBe("abcdefghijklmnopqrstuvwxyz1234");
+  });
 });
